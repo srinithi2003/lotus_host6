@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style5.css">
+</head>
+<body>
+    <div class="overlay">
+    
+        <form>
+            
+        <div class="con">
+    
+        <header class="head-form">
+            <h2>User Registration </h2>
+         
+        </header>
+
+        <br>
+        <div class="field-set">
+            
+               
+            
+            
+            <br>
+    
+            <!-- <span class="input-item">
+                <i class="fa fa-key"></i>
+            </span> -->
+            name<input class="form-input" id="name" type="text" placeholder="@UserName" required ><br>
+            age<input class="form-input" id="age" type="number" placeholder="@UserName" required ><br>
+            gender
+            <select id="gender">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+          <br>
+            mail id<input class="form-input" id="mail" type="email" placeholder="@UserName" required><br>
+            dob<input class="form-input" id="dob" type="date" placeholder="@UserName"  required><br>
+            username<input class="form-input" id="username" type="text" placeholder="@UserName" required ><br>
+            password<input class="form-input" type="password" placeholder="Password" id="pass"  name="pass" required >
+            
+
+         
+            <br>
+    
+        </div>
+        
+    
+        <div class="other">
+    
+            <button class="frgt-pass">Already have account ?</button>
+
+           <button class="sign-up" id="register" >Register</button>
+    
+        </div>
+            
+
+        </div>
+        
+    
+        </form>
+        </div>
+    
+    
+</body>
+
+<script>
+    const b1=document.getElementById("register");
+    b1.addEventListener('click',async()=>{
+        
+        const name=document.getElementById("name").value;
+        const age=document.getElementById("age").value;
+        const gender=document.getElementById("gender").value;
+        const dob=document.getElementById("dob").value;
+        const mail=document.getElementById("mail").value;
+        const username=document.getElementById("username").value;
+        const pass=document.getElementById("pass").value;
+       // alert(age)
+        const data=JSON.stringify({name:name,age:age,gender:gender,dob:dob,email:mail,username:username,password:pass});
+        alert(data);
+
+        await fetch('http://localhost:3010/user_create',{
+            mode:"cors",
+            method:"POST",
+            
+            headers:{
+            'Content-Type':'application/JSON'
+            },
+            body:data
+        })
+        .then(async(e)=>{
+            return e.json();
+        })
+        .then(async()=>{
+            alert("registered successfully");
+            window.location="../index.html";
+        })
+
+        .catch(async(err)=>{
+            alert("error "+err);
+        })
+
+    })
+</script>
+
+
+</html>
